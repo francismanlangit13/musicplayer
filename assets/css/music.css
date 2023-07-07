@@ -123,4 +123,11 @@ body{
     transition: width 0.1s linear;
   }
   
-  
+  .lyrics {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    text-align: center;
+    max-width: 500px;
+    background-color: rgba(66, 66, 66, .7);
+    color: white;
+}
