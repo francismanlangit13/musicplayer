@@ -33,6 +33,12 @@ function loadSong(song) {
   audio.src = `assets/audio/${song}.mp3`;
   cover.src = `assets/images/${song}.jpg`;
 
+  // Update media metadata
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: song,
+    artwork: [{ src: `assets/images/${song}.jpg`, sizes: '500x500', type: 'image/jpeg' }]
+  });
+
   // Clear previous lyrics
   lyrics = [];
   displayLyrics(lyrics);
@@ -56,6 +62,9 @@ function playSong() {
   musicContainer.classList.add('play');
   playBtn.querySelector('i.fas').classList.remove('fa-play');
   playBtn.querySelector('i.fas').classList.add('fa-pause');
+  
+  // Update the title of the web browser
+  document.title = `Music Player | ${title.innerText}`;
 
   audio.play();
 }
@@ -65,6 +74,9 @@ function pauseSong() {
   musicContainer.classList.remove('play');
   playBtn.querySelector('i.fas').classList.add('fa-play');
   playBtn.querySelector('i.fas').classList.remove('fa-pause');
+  
+  // Update the title of the web browser
+  document.title = `Music Player`;
 
   audio.pause();
 }
@@ -203,4 +215,23 @@ function displayLyric(text) {
   } else {
     console.error('Lyric text element not found.');
   }
+}
+
+// Register media session
+if ('mediaSession' in navigator) {
+  // Get the current song
+  const currentSong = songs[songIndex];
+  
+  // Set the path to the album art image
+  const albumArtPath = `assets/images/${currentSong}.jpg`;
+  
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: currentSong,
+    artwork: [{ src: albumArtPath, sizes: '500x500', type: 'image/jpeg' }]
+  });
+
+  navigator.mediaSession.setActionHandler('play', playSong);
+  navigator.mediaSession.setActionHandler('pause', pauseSong);
+  navigator.mediaSession.setActionHandler('previoustrack', prevSong);
+  navigator.mediaSession.setActionHandler('nexttrack', nextSong);
 }
