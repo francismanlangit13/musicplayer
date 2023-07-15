@@ -16,7 +16,8 @@ body{
 }
 
 h1 {
-  background-color: rgba(66, 66, 66, .7);
+    color: whitesmoke;
+    background-color: rgba(66, 66, 66, .7);
 }
 
 .audio-container{
