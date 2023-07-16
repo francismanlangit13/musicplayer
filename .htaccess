@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Remove trailing slash if it's not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+# Add .php extension internally
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
