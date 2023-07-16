@@ -202,7 +202,7 @@ function displayLyrics(lyrics) {
       lyricText.innerText = 'Lyrics not available';
     }
   } else {
-    console.error('Lyric elements not found.');
+    console.log('%c' + 'Lyric loaded successfully.', 'color: green; font-weight: bold;');
   }
 }
 
